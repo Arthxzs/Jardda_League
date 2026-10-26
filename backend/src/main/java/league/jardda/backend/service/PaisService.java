@@ -1,6 +1,7 @@
 package league.jardda.backend.service;
 
 import league.jardda.backend.entity.Pais;
+import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.PaisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,5 +15,10 @@ public class PaisService {
 
     public List<Pais> listAllPais() {
         return paisRepository.findAll();
+    }
+
+    public Pais listPaisById(long id) {
+        return paisRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("País " + id + " não encontrado"));
     }
 }

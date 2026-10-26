@@ -1,6 +1,8 @@
 package league.jardda.backend.service;
 
 import league.jardda.backend.entity.Partida;
+import league.jardda.backend.entity.Tecnico;
+import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.PartidaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,5 +16,10 @@ public class PartidaService {
 
     public List<Partida> listAllPartida() {
         return partidaRepository.findAll();
+    }
+
+    public Partida listPartidaById(long id) {
+        return partidaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Partida " + id + " não encontrada"));
     }
 }
