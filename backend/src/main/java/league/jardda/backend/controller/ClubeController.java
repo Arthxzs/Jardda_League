@@ -1,11 +1,12 @@
 package league.jardda.backend.controller;
 
-import league.jardda.backend.entity.Clube;
+import league.jardda.backend.dataTransferObj.ClubeDTO;
 import league.jardda.backend.service.ClubeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,12 +17,15 @@ public class ClubeController {
     private final ClubeService clubeService;
 
     @GetMapping("/clubes")
-    public ResponseEntity<List<Clube>> listAllClubes(){
-        return ResponseEntity.ok(clubeService.listAllClube());
+    public ResponseEntity<List<ClubeDTO>> listClubes(
+            @RequestParam(required = false) String nomeClube,
+            @RequestParam(required = false) String paisClube
+    ){
+        return ResponseEntity.ok(clubeService.listClube(nomeClube, paisClube));
     }
 
     @GetMapping("/clubes/{id}")
-    public ResponseEntity<Clube> listClubeById(@PathVariable long id) {
+    public ResponseEntity<ClubeDTO> listClubeById(@PathVariable long id) {
         return ResponseEntity.ok(clubeService.listClubeById(id));
     }
 }

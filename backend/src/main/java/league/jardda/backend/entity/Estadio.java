@@ -3,8 +3,6 @@ package league.jardda.backend.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity
 @Getter
 @Setter
@@ -25,5 +23,5 @@ public class Estadio {
 
     @ManyToOne
     @JoinColumn(name = "clube_id")
-    private Clube clubeId;
+    private Clube clube;
 }
