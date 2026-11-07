@@ -1,6 +1,5 @@
 package league.jardda.backend.controller;
 
-import league.jardda.backend.entity.Clube;
 import league.jardda.backend.entity.Pais;
 import league.jardda.backend.service.PaisService;
 import lombok.RequiredArgsConstructor;

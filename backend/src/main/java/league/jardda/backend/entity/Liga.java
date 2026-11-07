@@ -21,5 +21,7 @@ public class Liga {
     @JoinColumn(name = "pais_liga")
     private Pais paisLiga;
 
+    private String estiloLiga;
+
     private String categoriaLiga;
 }

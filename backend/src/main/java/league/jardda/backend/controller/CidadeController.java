@@ -19,9 +19,10 @@ public class CidadeController {
     @GetMapping("/cidades")
     public ResponseEntity<List<CidadeDTO>> listAllCidade(
             @RequestParam (required = false) String nomeCidade,
-            @RequestParam (required = false) String paisCidade
+            @RequestParam (required = false) String paisCidade,
+            @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(cidadeService.listCidade(nomeCidade, paisCidade));
+        return ResponseEntity.ok(cidadeService.listCidade(nomeCidade, paisCidade, paisId));
     }
 
     @GetMapping("/cidades/{id}")

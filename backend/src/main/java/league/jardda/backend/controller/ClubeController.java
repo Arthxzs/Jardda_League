@@ -19,9 +19,11 @@ public class ClubeController {
     @GetMapping("/clubes")
     public ResponseEntity<List<ClubeDTO>> listClubes(
             @RequestParam(required = false) String nomeClube,
-            @RequestParam(required = false) String paisClube
+            @RequestParam(required = false) String paisClube,
+            @RequestParam(required = false) Long clubeId,
+            @RequestParam(required = false) Long paisId
     ){
-        return ResponseEntity.ok(clubeService.listClube(nomeClube, paisClube));
+        return ResponseEntity.ok(clubeService.listClube(nomeClube, paisClube, clubeId, paisId));
     }
 
     @GetMapping("/clubes/{id}")

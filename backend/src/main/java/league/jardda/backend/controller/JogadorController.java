@@ -19,9 +19,10 @@ public class JogadorController {
     @GetMapping("/jogadores")
     public ResponseEntity<List<JogadorDTO>> listAllJogador(
             @RequestParam(required = false) String nomeJogador,
-            @RequestParam (required = false) String paisJogador
+            @RequestParam (required = false) String paisJogador,
+            @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(jogadorService.listJogador(nomeJogador, paisJogador));
+        return ResponseEntity.ok(jogadorService.listJogador(nomeJogador, paisJogador, paisId));
     }
 
     @GetMapping("/jogadores/{id}")

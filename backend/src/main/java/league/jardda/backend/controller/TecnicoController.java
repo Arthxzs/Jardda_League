@@ -19,9 +19,10 @@ public class TecnicoController {
     @GetMapping("/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnico(
             @RequestParam (required = false) String nomeTecnico,
-            @RequestParam (required = false) String paisTecnico
+            @RequestParam (required = false) String paisTecnico,
+            @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(tecnicoService.listTecnico(nomeTecnico, paisTecnico));
+        return ResponseEntity.ok(tecnicoService.listTecnico(nomeTecnico, paisTecnico, paisId));
     }
 
     @GetMapping("/tecnicos/{id}")

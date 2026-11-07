@@ -1,7 +1,9 @@
 package league.jardda.backend.controller;
 
 import league.jardda.backend.dataTransferObj.LigaDTO;
+import league.jardda.backend.dataTransferObj.PartidaDTO;
 import league.jardda.backend.service.LigaService;
+import league.jardda.backend.service.PartidaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +17,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LigaController {
     private final LigaService ligaService;
+    private final PartidaService partidaService;
 
     @GetMapping("/ligas")
     public ResponseEntity<List<LigaDTO>> listLiga(
             @RequestParam (required = false) String nomeLiga,
-            @RequestParam (required = false) String paisLiga
+            @RequestParam (required = false) String paisLiga,
+            @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(ligaService.listLiga(nomeLiga, paisLiga));
+        return ResponseEntity.ok(ligaService.listLiga(nomeLiga, paisLiga, paisId));
     }
 
     @GetMapping("/ligas/{id}")
     public ResponseEntity<LigaDTO> listLigaById(@PathVariable long id) {
         return ResponseEntity.ok(ligaService.listLigaById(id));
+    }
+
+    @GetMapping("/ligas/{id}/partidas")
+    public ResponseEntity<List<PartidaDTO>> listPartidasDaLiga(@PathVariable long id) {
+        return ResponseEntity.ok(partidaService.listPartida(null, null, null, ligaService.listLigaById(id).nomeLiga()));
     }
 }

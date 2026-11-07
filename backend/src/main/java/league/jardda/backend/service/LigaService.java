@@ -1,9 +1,9 @@
 package league.jardda.backend.service;
 
 import league.jardda.backend.dataTransferObj.LigaDTO;
+import league.jardda.backend.entity.Liga;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.LigaRepository;
-import league.jardda.backend.utils.StringFormatter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,74 +14,28 @@ import java.util.List;
 public class LigaService {
     private final LigaRepository ligaRepository;
 
-    public List<LigaDTO> listLiga(String nomeLiga, String paisLiga) {
-        if (nomeLiga == null && paisLiga == null) {
-            return ligaRepository.findAll()
-                    .stream().map(liga -> new LigaDTO(
-                            liga.getLigaId(),
-                            liga.getNomeLiga(),
-                            liga.getPaisLiga() == null ? "indefinido" : liga.getPaisLiga().getNomePais(),
-                            liga.getCategoriaLiga()
-                    )).toList();
-        } else if (nomeLiga != null && paisLiga == null) {
-            String finalNomeLiga = StringFormatter.toCapitalize(nomeLiga);
-            List<LigaDTO> ligasEncontradas = ligaRepository.findByNomeLiga(finalNomeLiga)
-                    .stream().map(liga -> new LigaDTO(
-                            liga.getLigaId(),
-                            liga.getNomeLiga(),
-                            liga.getPaisLiga() == null ? "indefinido" : liga.getPaisLiga().getNomePais(),
-                            liga.getCategoriaLiga()
-                    )).toList();
-            if (ligasEncontradas.isEmpty()) {
-                List<LigaDTO> ligasProximasEncontradas = ligaRepository.findAll()
-                        .stream()
-                        .filter(liga -> liga.getNomeLiga() != null
-                                && liga.getNomeLiga().contains(finalNomeLiga))
-                        .map(liga -> new LigaDTO(
-                                liga.getLigaId(),
-                                liga.getNomeLiga(),
-                                liga.getPaisLiga() == null ? "indefinido" : liga.getPaisLiga().getNomePais(),
-                                liga.getCategoriaLiga()
-                        )).toList();
-                if (ligasProximasEncontradas.isEmpty()) {
-                    throw new NotFoundException("Liga '" + nomeLiga + "' não encontrada");
-                } else {
-                    return ligasProximasEncontradas;
-                }
-            } else {
-                return ligasEncontradas;
-            }
-        } else {
-            String finalPaisLiga = StringFormatter.toCapitalize(paisLiga);
-            List<LigaDTO> ligasEncontradas = ligaRepository.findAll()
-                    .stream()
-                    .filter(liga -> liga.getPaisLiga() != null
-                            && liga.getPaisLiga().getNomePais().equals(finalPaisLiga))
-                    .map(liga -> new LigaDTO(
-                            liga.getLigaId(),
-                            liga.getNomeLiga(),
-                            liga.getPaisLiga().getNomePais(),
-                            liga.getCategoriaLiga()
-                    )).toList();
-            if (ligasEncontradas.isEmpty()) {
-                throw new NotFoundException("Liga com país '" + paisLiga + "' não encontrada");
-            } else {
-                return ligasEncontradas;
-            }
+    private LigaDTO toDTO(Liga liga) {
+        return new LigaDTO(
+                liga.getLigaId(),
+                liga.getNomeLiga(),
+                liga.getPaisLiga() == null ? "indefinido" : liga.getPaisLiga().getNomePais(),
+                liga.getEstiloLiga(),
+                liga.getCategoriaLiga()
+        );
+    }
+
+    public List<LigaDTO> listLiga(String nomeLiga, String paisLiga, Long paisId) {
+        List<LigaDTO> ligas = ligaRepository.filtrar(nomeLiga, paisLiga, paisId)
+                .stream().map(this::toDTO).toList();
+        if (ligas.isEmpty()) {
+            throw new NotFoundException("Nenhuma liga encontrada para os filtros informados");
         }
+        return ligas;
     }
 
     public LigaDTO listLigaById(long id) {
-        try {
-            return ligaRepository.findById(id)
-                    .stream().map(liga -> new LigaDTO(
-                            liga.getLigaId(),
-                            liga.getNomeLiga(),
-                            liga.getPaisLiga() == null ? "indefinido" : liga.getPaisLiga().getNomePais(),
-                            liga.getCategoriaLiga()
-                    )).toList().getFirst();
-        } catch (RuntimeException e) {
-            throw new NotFoundException("Liga " + id + " não encontrada");
-        }
+        return ligaRepository.findById(id)
+                .map(this::toDTO)
+                .orElseThrow(() -> new NotFoundException("Liga " + id + " não encontrada"));
     }
 }

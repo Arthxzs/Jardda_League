@@ -19,9 +19,11 @@ public class EstadioController {
     @GetMapping("/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadio(
             @RequestParam (required = false) String nomeEstadio,
-            @RequestParam (required = false) String clubeEstadio
+            @RequestParam (required = false) String clubeEstadio,
+            @RequestParam (required = false) Long cidadeId,
+            @RequestParam (required = false) Long clubeId
     ){
-        return ResponseEntity.ok(estadioService.listEstadio(nomeEstadio, clubeEstadio));
+        return ResponseEntity.ok(estadioService.listEstadio(nomeEstadio, clubeEstadio, cidadeId, clubeId));
     }
 
     @GetMapping("/estadios/{id}")
