@@ -34,7 +34,12 @@ public class LigaController {
     }
 
     @GetMapping("/ligas/{id}/partidas")
-    public ResponseEntity<List<PartidaDTO>> listPartidasDaLiga(@PathVariable long id) {
-        return ResponseEntity.ok(partidaService.listPartida(null, null, null, ligaService.listLigaById(id).nomeLiga()));
+    public ResponseEntity<List<PartidaDTO>> listPartidasDaLiga(
+            @PathVariable long id,
+            @RequestParam (required = false) String clubeCasa,
+            @RequestParam (required = false) String clubeFora,
+            @RequestParam (required = false) Integer rodada
+    ) {
+        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, ligaService.listLigaById(id).nomeLiga()));
     }
 }
