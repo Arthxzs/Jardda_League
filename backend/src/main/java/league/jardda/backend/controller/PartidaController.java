@@ -21,9 +21,10 @@ public class PartidaController {
             @RequestParam (required = false) String clubeCasa,
             @RequestParam (required = false) String clubeFora,
             @RequestParam (required = false) Integer rodada,
-            @RequestParam (required = false) String liga
+            @RequestParam (required = false) String liga,
+            @RequestParam (required = false) String estadioPartida
     ){
-        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, liga));
+        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, liga, estadioPartida));
     }
 
     @GetMapping("/partidas/{id}")

@@ -38,8 +38,9 @@ public class LigaController {
             @PathVariable long id,
             @RequestParam (required = false) String clubeCasa,
             @RequestParam (required = false) String clubeFora,
-            @RequestParam (required = false) Integer rodada
+            @RequestParam (required = false) Integer rodada,
+            @RequestParam (required = false) String estadioPartida
     ) {
-        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, ligaService.listLigaById(id).nomeLiga()));
+        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, ligaService.listLigaById(id).nomeLiga(), estadioPartida));
     }
 }

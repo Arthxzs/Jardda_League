@@ -1,7 +1,11 @@
 package league.jardda.backend.controller;
 
 import league.jardda.backend.dataTransferObj.ClubeDTO;
+import league.jardda.backend.dataTransferObj.EstadioDTO;
+import league.jardda.backend.dataTransferObj.PartidaDTO;
 import league.jardda.backend.service.ClubeService;
+import league.jardda.backend.service.EstadioService;
+import league.jardda.backend.service.PartidaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class ClubeController {
     private final ClubeService clubeService;
+    private final EstadioService estadioService;
+    private final PartidaService partidaService;
 
     @GetMapping("/clubes")
     public ResponseEntity<List<ClubeDTO>> listClubes(
@@ -29,5 +36,26 @@ public class ClubeController {
     @GetMapping("/clubes/{id}")
     public ResponseEntity<ClubeDTO> listClubeById(@PathVariable long id) {
         return ResponseEntity.ok(clubeService.listClubeById(id));
+    }
+
+    @GetMapping("/clubes/{id}/estadios")
+    public ResponseEntity<List<EstadioDTO>> listEstadiosDoClube(
+            @PathVariable long id,
+            @RequestParam (required = false) String nomeEstadio
+    ) {
+        return ResponseEntity.ok(estadioService.listEstadio(nomeEstadio, null, null, id));
+    }
+
+    @GetMapping("/clubes/{id}/partidas")
+    public ResponseEntity<List<PartidaDTO>> listPartidasDoClube(
+            @PathVariable long id,
+            @RequestParam (required = false) Integer rodada,
+            @RequestParam (required = false) String liga,
+            @RequestParam (required = false) String estadioPartida
+    ) {
+        List<PartidaDTO> partidas = new ArrayList<>();
+        partidas.addAll(partidaService.listPartida(clubeService.listClubeById(id).nomeClube(), null, rodada, liga, estadioPartida));
+        partidas.addAll(partidaService.listPartida(null, clubeService.listClubeById(id).nomeClube(), rodada, liga, estadioPartida));
+        return ResponseEntity.ok(partidas);
     }
 }

@@ -27,8 +27,8 @@ public class PartidaService {
         );
     }
 
-    public List<PartidaDTO> listPartida(String clubeCasa, String clubeFora, Integer rodada, String liga) {
-        List<PartidaDTO> partidas = partidaRepository.filtrar(clubeCasa, clubeFora, rodada, liga)
+    public List<PartidaDTO> listPartida(String clubeCasa, String clubeFora, Integer rodada, String liga, String estadioPartida) {
+        List<PartidaDTO> partidas = partidaRepository.filtrar(clubeCasa, clubeFora, rodada, liga, estadioPartida)
                 .stream()
                 .map(this::toDTO)
                 .toList();

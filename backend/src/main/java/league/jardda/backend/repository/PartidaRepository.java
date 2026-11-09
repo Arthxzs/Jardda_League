@@ -22,10 +22,14 @@ public interface PartidaRepository extends JpaRepository<Partida, Long> {
                    OR p.rodadaPartida = :rodada)
               AND (CAST(:liga AS string) IS NULL
                    OR LOWER(l.nomeLiga) LIKE LOWER(CONCAT('%', CAST(:liga AS string), '%')))
+              AND (CAST(:estadio AS string) IS NULL
+                   OR LOWER(e.nomeEstadio) LIKE LOWER(CONCAT('%', CAST(:estadio AS string), '%')))
             ORDER BY p.dataPartida
             """)
     List<Partida> filtrar(@Param("clubeCasa") String clubeCasa,
                           @Param("clubeFora") String clubeFora,
                           @Param("rodada") Integer rodada,
-                          @Param("liga") String liga);
+                          @Param("liga") String liga,
+                          @Param("estadio") String estadioPartida
+    );
 }
