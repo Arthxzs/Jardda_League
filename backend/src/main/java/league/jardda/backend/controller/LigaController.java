@@ -1,7 +1,9 @@
 package league.jardda.backend.controller;
 
+import league.jardda.backend.dataTransferObj.ClubeLigaDTO;
 import league.jardda.backend.dataTransferObj.LigaDTO;
 import league.jardda.backend.dataTransferObj.PartidaDTO;
+import league.jardda.backend.service.ClubeLigaService;
 import league.jardda.backend.service.LigaService;
 import league.jardda.backend.service.PartidaService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.List;
 public class LigaController {
     private final LigaService ligaService;
     private final PartidaService partidaService;
+    private final ClubeLigaService clubeLigaService;
 
     @GetMapping("/ligas")
     public ResponseEntity<List<LigaDTO>> listLiga(
@@ -42,5 +45,12 @@ public class LigaController {
             @RequestParam (required = false) String estadioPartida
     ) {
         return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, ligaService.listLigaById(id).nomeLiga(), estadioPartida));
+    }
+
+    @GetMapping("/ligas/{id}/clubes")
+    public ResponseEntity<List<ClubeLigaDTO>> clubesDaLiga(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "false") boolean apenasAtivos) {
+        return ResponseEntity.ok(clubeLigaService.listarPorLiga(id, apenasAtivos));
     }
 }

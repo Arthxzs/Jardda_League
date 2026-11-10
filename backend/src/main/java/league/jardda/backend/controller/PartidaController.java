@@ -1,6 +1,8 @@
 package league.jardda.backend.controller;
 
+import league.jardda.backend.dataTransferObj.EstatisticaPartidaDTO;
 import league.jardda.backend.dataTransferObj.PartidaDTO;
+import league.jardda.backend.service.EstatisticaPartidaService;
 import league.jardda.backend.service.PartidaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PartidaController {
     private final PartidaService partidaService;
+    private final EstatisticaPartidaService estatisticaPartidaService;
 
     @GetMapping("/partidas")
     public ResponseEntity<List<PartidaDTO>> listPartida(
@@ -30,5 +33,10 @@ public class PartidaController {
     @GetMapping("/partidas/{id}")
     public ResponseEntity<PartidaDTO> listPartidaById(@PathVariable long id) {
         return ResponseEntity.ok(partidaService.listPartidaById(id));
+    }
+
+    @GetMapping("/partidas/{id}/estatisticas")
+    public ResponseEntity<EstatisticaPartidaDTO> estatisticas(@PathVariable Long id) {
+        return ResponseEntity.ok(estatisticaPartidaService.buscarPorPartida(id));
     }
 }
