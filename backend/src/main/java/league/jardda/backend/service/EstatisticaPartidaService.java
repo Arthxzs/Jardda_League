@@ -4,7 +4,7 @@ import league.jardda.backend.dataTransferObj.EstatisticaPartidaDTO;
 import league.jardda.backend.entity.EstatisticaPartida;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.EstatisticaPartidaRepository;
-import league.jardda.backend.repository.PartidaRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,10 @@ import org.springframework.stereotype.Service;
 public class EstatisticaPartidaService {
 
     private final EstatisticaPartidaRepository estatisticaPartidaRepository;
-    private final PartidaRepository partidaRepository;
+    private final ParameterValidator parameterValidator;
 
     public EstatisticaPartidaDTO buscarPorPartida(Long partidaId) {
-        if (!partidaRepository.existsById(partidaId)) {
-            throw new NotFoundException("Partida com id " + partidaId + " não encontrada");
-        }
+        parameterValidator.validarPartida(partidaId);
         return estatisticaPartidaRepository.findById(partidaId)
                 .map(this::toDTO)
                 .orElseThrow(() -> new NotFoundException(

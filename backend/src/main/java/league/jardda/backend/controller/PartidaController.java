@@ -24,15 +24,15 @@ public class PartidaController {
             @RequestParam (required = false) String clubeCasa,
             @RequestParam (required = false) String clubeFora,
             @RequestParam (required = false) Integer rodada,
-            @RequestParam (required = false) String liga,
-            @RequestParam (required = false) String estadioPartida
+            @RequestParam (required = false) Long ligaId,
+            @RequestParam (required = false) String estadio
     ){
-        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, liga, estadioPartida));
+        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId, estadio));
     }
 
     @GetMapping("/partidas/{id}")
     public ResponseEntity<PartidaDTO> listPartidaById(@PathVariable long id) {
-        return ResponseEntity.ok(partidaService.listPartidaById(id));
+        return ResponseEntity.ok(partidaService.buscarPorId(id));
     }
 
     @GetMapping("/partidas/{id}/estatisticas")

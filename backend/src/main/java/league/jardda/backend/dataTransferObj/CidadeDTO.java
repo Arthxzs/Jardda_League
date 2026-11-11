@@ -1,9 +1,9 @@
 package league.jardda.backend.dataTransferObj;
 
 public record CidadeDTO(
-        long cidadeId,
-        String nomeCidade,
-        String paisCidade,
+        Long id,
+        String nome,
+        String pais,
         String siglaPais
 ) {
 }

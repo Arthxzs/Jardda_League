@@ -3,8 +3,8 @@ package league.jardda.backend.service;
 import league.jardda.backend.dataTransferObj.PartidaDTO;
 import league.jardda.backend.entity.Partida;
 import league.jardda.backend.exception.NotFoundException;
-import league.jardda.backend.repository.ClubeRepository;
 import league.jardda.backend.repository.PartidaRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,25 +14,29 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PartidaService {
     private final PartidaRepository partidaRepository;
-    private final ClubeRepository clubeRepository;
+    private final ParameterValidator parameterValidator;
 
     private PartidaDTO toDTO(Partida partida) {
         return new PartidaDTO(
                 partida.getPartidaId(),
+                partida.getClube1().getClubeId(),
                 partida.getClube1().getNomeClube(),
+                partida.getClube2().getClubeId(),
                 partida.getClube2().getNomeClube(),
                 partida.getLigaPartida().getNomeLiga(),
                 partida.getEstadioPartida() == null ? null : partida.getEstadioPartida().getNomeEstadio(),
                 partida.getDataPartida(),
                 partida.getPublicoPartida(),
-                partida.getRodadaPartida() == null ? 0 : partida.getRodadaPartida()
+                partida.getRodadaPartida() == null ? null : partida.getRodadaPartida()
         );
     }
 
-    public List<PartidaDTO> listPartida(String clubeCasa, String clubeFora, Integer rodada,
-                                        String liga, String estadioPartida) {
+    public List<PartidaDTO> listarPartida(String clubeCasa, String clubeFora, Integer rodada,
+                                          Long ligaId, String estadio) {
+        parameterValidator.validarLiga(ligaId);
+
         List<PartidaDTO> partidas = partidaRepository
-                .filtrar(clubeCasa, clubeFora, rodada, liga, estadioPartida, null)
+                .filtrar(clubeCasa, clubeFora, rodada, ligaId, estadio)
                 .stream()
                 .map(this::toDTO)
                 .toList();
@@ -43,14 +47,15 @@ public class PartidaService {
         return partidas;
     }
 
-    public List<PartidaDTO> listPartidasDoClube(Long clubeId, Integer rodada,
-                                                String liga, String estadioPartida) {
-        if (!clubeRepository.existsById(clubeId)) {
-            throw new NotFoundException("Clube com id " + clubeId + " não encontrado");
-        }
+    public List<PartidaDTO> listarPartidasDoClube(Long clubeId, Integer rodada,
+                                                  Long ligaId, String estadio) {
+
+        parameterValidator.validarClube(clubeId);
+        parameterValidator.validarLiga(ligaId);
+
 
         List<PartidaDTO> partidas = partidaRepository
-                .filtrar(null, null, rodada, liga, estadioPartida, clubeId)
+                .filtrar(null, null, rodada, ligaId, estadio)
                 .stream()
                 .map(this::toDTO)
                 .toList();
@@ -61,9 +66,9 @@ public class PartidaService {
         return partidas;
     }
 
-    public PartidaDTO listPartidaById(long id) {
+    public PartidaDTO buscarPorId(long id) {
         return partidaRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Partida " + id  + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Partida com id " + id  + " não encontrada"));
     }
 }

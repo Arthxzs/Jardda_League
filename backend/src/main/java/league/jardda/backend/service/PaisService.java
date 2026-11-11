@@ -13,12 +13,12 @@ import java.util.List;
 public class PaisService {
     private final PaisRepository paisRepository;
 
-    public List<Pais> listAllPais() {
+    public List<Pais> listarPais() {
         return paisRepository.findAll();
     }
 
-    public Pais listPaisById(long id) {
+    public Pais buscarPorId(long id) {
         return paisRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("País " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("País com id " + id + " não encontrado"));
     }
 }

@@ -4,6 +4,7 @@ import league.jardda.backend.dataTransferObj.JogadorDTO;
 import league.jardda.backend.entity.Jogador;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.JogadorRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JogadorService {
     private final JogadorRepository jogadorRepository;
+    private final ParameterValidator parameterValidator;
 
     private JogadorDTO toDTO(Jogador jogador) {
         return new JogadorDTO(
@@ -25,18 +27,21 @@ public class JogadorService {
         );
     }
 
-    public List<JogadorDTO> listJogador(String nomeJogador, String paisJogador, Long paisId) {
-        List<JogadorDTO> jogadores = jogadorRepository.filtrar(nomeJogador, paisJogador, paisId)
+    public List<JogadorDTO> listarJogador(String nome, String pais, Long paisId) {
+        parameterValidator.validarPais(paisId);
+
+        List<JogadorDTO> jogadores = jogadorRepository.filtrar(nome, pais, paisId)
                 .stream().map(this::toDTO).toList();
+
         if (jogadores.isEmpty()) {
             throw new NotFoundException("Nenhum jogador encontrado para os filtros informados");
         }
         return jogadores;
     }
 
-    public JogadorDTO listJogadorById(long id) {
+    public JogadorDTO buscarPorId(long id) {
         return jogadorRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Jogador " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Jogador com id " + id + " não encontrado"));
     }
 }

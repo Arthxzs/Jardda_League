@@ -4,7 +4,7 @@ import league.jardda.backend.dataTransferObj.ClubeJogadorDTO;
 import league.jardda.backend.entity.ClubeJogador;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.ClubeJogadorRepository;
-import league.jardda.backend.repository.ClubeRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,10 @@ import java.util.List;
 public class ClubeJogadorService {
 
     private final ClubeJogadorRepository clubeJogadorRepository;
-    private final ClubeRepository clubeRepository;
+    private final ParameterValidator parameterValidator;
 
-    public List<ClubeJogadorDTO> listarElenco(Long clubeId, Boolean apenasAtivos) {
-        if (!clubeRepository.existsById(clubeId)) {
-            throw new NotFoundException("Clube com id " + clubeId + " não encontrado");
-        }
+    public List<ClubeJogadorDTO> listarElenco(Long clubeId, boolean apenasAtivos) {
+        parameterValidator.validarClube(clubeId);
 
         List<ClubeJogador> contratos = clubeJogadorRepository.buscarPorClube(clubeId, apenasAtivos);
 
@@ -36,6 +34,8 @@ public class ClubeJogadorService {
                 cj.getClubeJogadorId(),
                 cj.getJogador().getJogadorId(),
                 cj.getJogador().getNomeJogador(),
+                cj.getClube().getClubeId(),
+                cj.getClube().getNomeClube(),
                 cj.getInicioContratoJogador(),
                 cj.getPrevisaoContratoJogador(),
                 cj.getTerminoContratoJogador(),

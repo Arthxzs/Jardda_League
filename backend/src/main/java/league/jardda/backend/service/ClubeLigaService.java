@@ -4,8 +4,7 @@ import league.jardda.backend.dataTransferObj.ClubeLigaDTO;
 import league.jardda.backend.entity.ClubeLiga;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.ClubeLigaRepository;
-import league.jardda.backend.repository.ClubeRepository;
-import league.jardda.backend.repository.LigaRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,10 @@ import java.util.List;
 public class ClubeLigaService {
 
     private final ClubeLigaRepository clubeLigaRepository;
-    private final ClubeRepository clubeRepository;
-    private final LigaRepository ligaRepository;
+    private final ParameterValidator parameterValidator;
 
     public List<ClubeLigaDTO> listarPorClube(Long clubeId, boolean apenasAtivos) {
-        if (!clubeRepository.existsById(clubeId)) {
-            throw new NotFoundException("Clube com id " + clubeId + " não encontrado");
-        }
+        parameterValidator.validarClube(clubeId);
         List<ClubeLiga> vinculos = clubeLigaRepository.buscarPorClube(clubeId, apenasAtivos);
         if (vinculos.isEmpty()) {
             throw new NotFoundException("Clube com id " + clubeId + " não possui ligas");
@@ -31,9 +27,7 @@ public class ClubeLigaService {
     }
 
     public List<ClubeLigaDTO> listarPorLiga(Long ligaId, boolean apenasAtivos) {
-        if (!ligaRepository.existsById(ligaId)) {
-            throw new NotFoundException("Liga com id " + ligaId + " não encontrada");
-        }
+        parameterValidator.validarLiga(ligaId);
         List<ClubeLiga> vinculos = clubeLigaRepository.buscarPorLiga(ligaId, apenasAtivos);
         if (vinculos.isEmpty()) {
             throw new NotFoundException("Liga com id " + ligaId + " não possui clubes");

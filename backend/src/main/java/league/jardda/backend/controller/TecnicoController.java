@@ -21,22 +21,22 @@ public class TecnicoController {
 
     @GetMapping("/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnico(
-            @RequestParam (required = false) String nomeTecnico,
-            @RequestParam (required = false) String paisTecnico,
+            @RequestParam (required = false) String nome,
+            @RequestParam (required = false) String pais,
             @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(tecnicoService.listTecnico(nomeTecnico, paisTecnico, paisId));
+        return ResponseEntity.ok(tecnicoService.listarTecnico(nome, pais, paisId));
     }
 
     @GetMapping("/tecnicos/{id}")
     public ResponseEntity<TecnicoDTO> listTecnicoById(@PathVariable long id) {
-        return ResponseEntity.ok(tecnicoService.listTecnicoById(id));
+        return ResponseEntity.ok(tecnicoService.buscarPorId(id));
     }
 
     @GetMapping("/tecnicos/{id}/contratos")
     public ResponseEntity<List<ClubeTecnicoDTO>> contratosDoTecnico(
             @PathVariable Long id,
-            @RequestParam(defaultValue = "false") boolean apenasContratosAtivos) {
-        return ResponseEntity.ok(clubeTecnicoService.listarPorTecnico(id, apenasContratosAtivos));
+            @RequestParam(defaultValue = "false") boolean apenasAtivos) {
+        return ResponseEntity.ok(clubeTecnicoService.listarPorTecnico(id, apenasAtivos));
     }
 }

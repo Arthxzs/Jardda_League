@@ -4,6 +4,7 @@ import league.jardda.backend.dataTransferObj.CidadeDTO;
 import league.jardda.backend.entity.Cidade;
 import league.jardda.backend.exception.NotFoundException;
 import league.jardda.backend.repository.CidadeRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CidadeService {
     private final CidadeRepository cidadeRepository;
+    private final ParameterValidator parameterValidator;
 
     private CidadeDTO toDTO(Cidade cidade) {
         return new CidadeDTO(
@@ -23,18 +25,21 @@ public class CidadeService {
         );
     }
 
-    public List<CidadeDTO> listCidade(String nomeCidade, String paisCidade, Long paisId) {
-        List<CidadeDTO> cidades = cidadeRepository.filtrar(nomeCidade, paisCidade, paisId)
+    public List<CidadeDTO> listarCidade(String nome, String pais, Long paisId) {
+        parameterValidator.validarPais(paisId);
+
+        List<CidadeDTO> cidades = cidadeRepository.filtrar(nome, pais, paisId)
                 .stream().map(this::toDTO).toList();
+
         if (cidades.isEmpty()) {
             throw new NotFoundException("Nenhuma cidade encontrada para os filtros informados.");
         }
         return cidades;
     }
 
-    public CidadeDTO listCidadeById(long id) {
+    public CidadeDTO buscarPorId(long id) {
         return cidadeRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Cidade " + id + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Cidade com id " + id + " não encontrada"));
     }
 }

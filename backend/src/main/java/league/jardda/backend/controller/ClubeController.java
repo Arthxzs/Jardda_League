@@ -23,35 +23,35 @@ public class ClubeController {
 
     @GetMapping("/clubes")
     public ResponseEntity<List<ClubeDTO>> listClubes(
-            @RequestParam(required = false) String nomeClube,
-            @RequestParam(required = false) String paisClube,
-            @RequestParam(required = false) Long clubeId,
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String pais,
+            @RequestParam(required = false) Long cidadeId,
             @RequestParam(required = false) Long paisId
     ){
-        return ResponseEntity.ok(clubeService.listClube(nomeClube, paisClube, clubeId, paisId));
+        return ResponseEntity.ok(clubeService.listarClube(nome, pais, cidadeId, paisId));
     }
 
     @GetMapping("/clubes/{id}")
     public ResponseEntity<ClubeDTO> listClubeById(@PathVariable long id) {
-        return ResponseEntity.ok(clubeService.listClubeById(id));
+        return ResponseEntity.ok(clubeService.buscarPorId(id));
     }
 
     @GetMapping("/clubes/{id}/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadiosDoClube(
             @PathVariable long id,
-            @RequestParam (required = false) String nomeEstadio
+            @RequestParam (required = false) String nome
     ) {
-        return ResponseEntity.ok(estadioService.listEstadio(nomeEstadio, null, null, id));
+        return ResponseEntity.ok(estadioService.listarEstadio(nome, null, null, id));
     }
 
     @GetMapping("/clubes/{id}/partidas")
     public ResponseEntity<List<PartidaDTO>> listPartidasDoClube(
             @PathVariable long id,
             @RequestParam(required = false) Integer rodada,
-            @RequestParam(required = false) String liga,
-            @RequestParam(required = false) String estadioPartida
+            @RequestParam(required = false) Long ligaId,
+            @RequestParam(required = false) String estadio
     ) {
-        return ResponseEntity.ok(partidaService.listPartidasDoClube(id, rodada, liga, estadioPartida));
+        return ResponseEntity.ok(partidaService.listarPartidasDoClube(id, rodada, ligaId, estadio));
     }
 
     @GetMapping("/clubes/{id}/elenco")
@@ -65,8 +65,8 @@ public class ClubeController {
     @GetMapping("/clubes/{id}/tecnicos")
     public ResponseEntity<List<ClubeTecnicoDTO>> tecnicosDoClube(
             @PathVariable Long id,
-            @RequestParam(defaultValue = "false") boolean apenasContratosAtivos) {
-        return ResponseEntity.ok(clubeTecnicoService.listarPorClube(id, apenasContratosAtivos));
+            @RequestParam(defaultValue = "false") boolean apenasAtivos) {
+        return ResponseEntity.ok(clubeTecnicoService.listarPorClube(id, apenasAtivos));
     }
 
     @GetMapping("/clubes/{id}/ligas")

@@ -21,17 +21,17 @@ public class EstadioController {
 
     @GetMapping("/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadio(
-            @RequestParam (required = false) String nomeEstadio,
-            @RequestParam (required = false) String clubeEstadio,
+            @RequestParam (required = false) String nome,
+            @RequestParam (required = false) String clube,
             @RequestParam (required = false) Long cidadeId,
             @RequestParam (required = false) Long clubeId
     ){
-        return ResponseEntity.ok(estadioService.listEstadio(nomeEstadio, clubeEstadio, cidadeId, clubeId));
+        return ResponseEntity.ok(estadioService.listarEstadio(nome, clube, cidadeId, clubeId));
     }
 
     @GetMapping("/estadios/{id}")
     public ResponseEntity<EstadioDTO> listEstadioById(@PathVariable long id) {
-        return ResponseEntity.ok(estadioService.listEstadioById(id));
+        return ResponseEntity.ok(estadioService.buscarPorId(id));
     }
 
     @GetMapping("/estadios/{id}/partidas")
@@ -40,8 +40,8 @@ public class EstadioController {
             @RequestParam (required = false) String clubeCasa,
             @RequestParam (required = false) String clubeFora,
             @RequestParam (required = false) Integer rodada,
-            @RequestParam (required = false) String liga
+            @RequestParam (required = false) Long ligaId
     ) {
-        return ResponseEntity.ok(partidaService.listPartida(clubeCasa, clubeFora, rodada, liga,  estadioService.listEstadioById(id).nomeEstadio()));
+        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId,  estadioService.buscarPorId(id).nome()));
     }
 }

@@ -17,7 +17,7 @@ public interface ClubeTecnicoRepository extends JpaRepository<ClubeTecnico, Long
             AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
           """)
     List<ClubeTecnico> buscarPorClube(@Param("clubeId") Long clubeId,
-                                      @Param("ativo") boolean apenasContratosAtivos);
+                                      @Param("ativo") boolean apenasAtivos);
 
     @Query("""
             SELECT ct FROM ClubeTecnico ct
@@ -27,5 +27,5 @@ public interface ClubeTecnicoRepository extends JpaRepository<ClubeTecnico, Long
             AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
           """)
     List<ClubeTecnico> buscarPorTecnico(@Param("tecnicoId") Long tecnicoId,
-                                        @Param("ativo") boolean apenasContratosAtivos);
+                                        @Param("ativo") boolean apenasAtivos);
 }

@@ -3,9 +3,8 @@ package league.jardda.backend.service;
 import league.jardda.backend.dataTransferObj.ClubeTecnicoDTO;
 import league.jardda.backend.entity.ClubeTecnico;
 import league.jardda.backend.exception.NotFoundException;
-import league.jardda.backend.repository.ClubeRepository;
 import league.jardda.backend.repository.ClubeTecnicoRepository;
-import league.jardda.backend.repository.TecnicoRepository;
+import league.jardda.backend.utils.ParameterValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,10 @@ import java.util.List;
 public class ClubeTecnicoService {
 
     private final ClubeTecnicoRepository clubeTecnicoRepository;
-    private final ClubeRepository clubeRepository;
-    private final TecnicoRepository tecnicoRepository;
+    private final ParameterValidator parameterValidator;
 
     public List<ClubeTecnicoDTO> listarPorClube(Long clubeId, boolean apenasAtivos) {
-        if (!clubeRepository.existsById(clubeId)) {
-            throw new NotFoundException("Clube com id " + clubeId + " não encontrado");
-        }
+        parameterValidator.validarClube(clubeId);
         List<ClubeTecnico> contratos = clubeTecnicoRepository.buscarPorClube(clubeId, apenasAtivos);
         if (contratos.isEmpty()) {
             throw new NotFoundException("Clube com id " + clubeId + " não possui técnicos");
@@ -31,9 +27,7 @@ public class ClubeTecnicoService {
     }
 
     public List<ClubeTecnicoDTO> listarPorTecnico(Long tecnicoId, boolean apenasAtivos) {
-        if (!tecnicoRepository.existsById(tecnicoId)) {
-            throw new NotFoundException("Técnico com id " + tecnicoId + " não encontrado");
-        }
+        parameterValidator.validarTecnico(tecnicoId);
         List<ClubeTecnico> contratos = clubeTecnicoRepository.buscarPorTecnico(tecnicoId, apenasAtivos);
         if (contratos.isEmpty()) {
             throw new NotFoundException("Técnico com id " + tecnicoId + " não possui contratos");

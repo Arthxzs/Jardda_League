@@ -12,11 +12,12 @@ public interface ClubeJogadorRepository extends JpaRepository<ClubeJogador, Long
     @Query("""
             SELECT cj FROM ClubeJogador cj
             JOIN FETCH cj.jogador
+            JOIN FETCH cj.clube
             WHERE cj.clube.clubeId = :clubeId
-            AND (:ativo = false OR cj.terminoContratoJogador IS null)
+            AND (:ativo = false OR cj.terminoContratoJogador IS NULL)
           """)
     List<ClubeJogador> buscarPorClube(
             @Param("clubeId") Long clubeId,
-            @Param("ativo") Boolean apenasAtivos
+            @Param("ativo") boolean apenasAtivos
     );
 }

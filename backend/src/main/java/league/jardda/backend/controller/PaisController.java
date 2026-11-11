@@ -24,52 +24,52 @@ public class PaisController {
 
     @GetMapping("/paises")
     public ResponseEntity<List<Pais>> listAllPais(){
-        return ResponseEntity.ok(paisService.listAllPais());
+        return ResponseEntity.ok(paisService.listarPais());
     }
 
     @GetMapping("/paises/{id}")
     public ResponseEntity<Pais> listPaisById(@PathVariable long id) {
-        return ResponseEntity.ok(paisService.listPaisById(id));
+        return ResponseEntity.ok(paisService.buscarPorId(id));
     }
 
     @GetMapping("/paises/{id}/cidades")
     public ResponseEntity<List<CidadeDTO>> listCidadesDoPais(
             @PathVariable long id,
-            @RequestParam(required = false) String nomeCidade
+            @RequestParam(required = false) String nome
     ) {
-        return ResponseEntity.ok(cidadeService.listCidade(nomeCidade, null, id));
+        return ResponseEntity.ok(cidadeService.listarCidade(nome, null, id));
     }
 
     @GetMapping("/paises/{id}/ligas")
     public ResponseEntity<List<LigaDTO>> listLigasDoPais(
             @PathVariable long id,
-            @RequestParam (required = false) String nomeLiga
+            @RequestParam (required = false) String nome
     ) {
-        return ResponseEntity.ok(ligaService.listLiga(nomeLiga, null, id));
+        return ResponseEntity.ok(ligaService.listarLiga(nome, null, id));
     }
 
     @GetMapping("/paises/{id}/clubes")
-    public ResponseEntity<List<ClubeDTO>> listClubesDaCidade(
+    public ResponseEntity<List<ClubeDTO>> listClubesDoPais(
             @PathVariable long id,
-            @RequestParam(required = false) String nomeClube,
-            @RequestParam(required = false) Long clubeId
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) Long cidadeId
     ) {
-        return ResponseEntity.ok(clubeService.listClube(nomeClube, null, clubeId, id));
+        return ResponseEntity.ok(clubeService.listarClube(nome, null, cidadeId, id));
     }
 
     @GetMapping("/paises/{id}/jogadores")
     public ResponseEntity<List<JogadorDTO>> listJogadoresDoPais(
             @PathVariable long id,
-            @RequestParam(required = false) String nomeJogador
+            @RequestParam(required = false) String nome
     ) {
-        return ResponseEntity.ok(jogadorService.listJogador(nomeJogador, null, id));
+        return ResponseEntity.ok(jogadorService.listarJogador(nome, null, id));
     }
 
     @GetMapping("/paises/{id}/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnicosDoPais(
             @PathVariable long id,
-            @RequestParam (required = false) String nomeTecnico
+            @RequestParam (required = false) String nome
     ) {
-        return ResponseEntity.ok(tecnicoService.listTecnico(nomeTecnico, null, id));
+        return ResponseEntity.ok(tecnicoService.listarTecnico(nome, null, id));
     }
 }

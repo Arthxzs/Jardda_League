@@ -18,15 +18,15 @@ public class JogadorController {
 
     @GetMapping("/jogadores")
     public ResponseEntity<List<JogadorDTO>> listAllJogador(
-            @RequestParam(required = false) String nomeJogador,
-            @RequestParam (required = false) String paisJogador,
+            @RequestParam(required = false) String nome,
+            @RequestParam (required = false) String pais,
             @RequestParam (required = false) Long paisId
     ){
-        return ResponseEntity.ok(jogadorService.listJogador(nomeJogador, paisJogador, paisId));
+        return ResponseEntity.ok(jogadorService.listarJogador(nome, pais, paisId));
     }
 
     @GetMapping("/jogadores/{id}")
     public ResponseEntity<JogadorDTO> listJogadorById(@PathVariable long id) {
-        return ResponseEntity.ok(jogadorService.listJogadorById(id));
+        return ResponseEntity.ok(jogadorService.buscarPorId(id));
     }
 }

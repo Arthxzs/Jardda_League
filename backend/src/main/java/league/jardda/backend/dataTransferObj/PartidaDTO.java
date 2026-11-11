@@ -3,13 +3,15 @@ package league.jardda.backend.dataTransferObj;
 import java.time.LocalDate;
 
 public record PartidaDTO(
-        long partidaId,
+        Long id,
+        Long clubeCasaId,
         String clubeCasa,
+        Long clubeForaId,
         String clubeFora,
-        String ligaPartida,
-        String estadioPartida,
-        LocalDate dataPartida,
-        long publicoPartida,
-        int rodadaPartida
+        String liga,
+        String estadio,
+        LocalDate data,
+        Integer publico,
+        Integer rodada
 ) {
 }

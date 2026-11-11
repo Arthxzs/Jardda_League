@@ -1,9 +1,9 @@
 package league.jardda.backend.dataTransferObj;
 
 public record LigaDTO (
-        long ligaId,
-        String nomeLiga,
-        String paisLiga,
-        String estiloLiga,
-        String categoriaLiga
+        Long id,
+        String nome,
+        String pais,
+        String estilo,
+        String categoria
 ){}
