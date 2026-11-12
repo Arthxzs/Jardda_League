@@ -29,7 +29,7 @@ public class TecnicoController {
     }
 
     @GetMapping("/tecnicos/{id}")
-    public ResponseEntity<TecnicoDTO> listTecnicoById(@PathVariable long id) {
+    public ResponseEntity<TecnicoDTO> listTecnicoById(@PathVariable Long id) {
         return ResponseEntity.ok(tecnicoService.buscarPorId(id));
     }
 

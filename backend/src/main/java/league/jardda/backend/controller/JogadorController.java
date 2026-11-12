@@ -26,7 +26,7 @@ public class JogadorController {
     }
 
     @GetMapping("/jogadores/{id}")
-    public ResponseEntity<JogadorDTO> listJogadorById(@PathVariable long id) {
+    public ResponseEntity<JogadorDTO> listJogadorById(@PathVariable Long id) {
         return ResponseEntity.ok(jogadorService.buscarPorId(id));
     }
 }

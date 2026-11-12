@@ -23,20 +23,23 @@ public class PartidaService {
                 partida.getClube1().getNomeClube(),
                 partida.getClube2().getClubeId(),
                 partida.getClube2().getNomeClube(),
+                partida.getLigaPartida().getLigaId(),
                 partida.getLigaPartida().getNomeLiga(),
+                partida.getEstadioPartida() == null ? null : partida.getEstadioPartida().getEstadioId(),
                 partida.getEstadioPartida() == null ? null : partida.getEstadioPartida().getNomeEstadio(),
                 partida.getDataPartida(),
                 partida.getPublicoPartida(),
-                partida.getRodadaPartida() == null ? null : partida.getRodadaPartida()
+                partida.getRodadaPartida()
         );
     }
 
     public List<PartidaDTO> listarPartida(String clubeCasa, String clubeFora, Integer rodada,
-                                          Long ligaId, String estadio) {
+                                          Long ligaId, String estadio, Long estadioId) {
         parameterValidator.validarLiga(ligaId);
+        parameterValidator.validarEstadio(estadioId);
 
         List<PartidaDTO> partidas = partidaRepository
-                .filtrar(clubeCasa, clubeFora, rodada, ligaId, estadio)
+                .filtrar(clubeCasa, clubeFora, rodada, ligaId, estadio, estadioId,null)
                 .stream()
                 .map(this::toDTO)
                 .toList();
@@ -48,14 +51,15 @@ public class PartidaService {
     }
 
     public List<PartidaDTO> listarPartidasDoClube(Long clubeId, Integer rodada,
-                                                  Long ligaId, String estadio) {
+                                                  Long ligaId, String estadio, Long estadioId) {
 
         parameterValidator.validarClube(clubeId);
         parameterValidator.validarLiga(ligaId);
+        parameterValidator.validarEstadio(estadioId);
 
 
         List<PartidaDTO> partidas = partidaRepository
-                .filtrar(null, null, rodada, ligaId, estadio)
+                .filtrar(null, null, rodada, ligaId, estadio, estadioId, clubeId)
                 .stream()
                 .map(this::toDTO)
                 .toList();

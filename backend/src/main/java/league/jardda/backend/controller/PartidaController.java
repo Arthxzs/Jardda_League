@@ -25,13 +25,14 @@ public class PartidaController {
             @RequestParam (required = false) String clubeFora,
             @RequestParam (required = false) Integer rodada,
             @RequestParam (required = false) Long ligaId,
-            @RequestParam (required = false) String estadio
+            @RequestParam (required = false) String estadio,
+            @RequestParam (required = false) Long estadioId
     ){
-        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId, estadio));
+        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId, estadio, estadioId));
     }
 
     @GetMapping("/partidas/{id}")
-    public ResponseEntity<PartidaDTO> listPartidaById(@PathVariable long id) {
+    public ResponseEntity<PartidaDTO> listPartidaById(@PathVariable Long id) {
         return ResponseEntity.ok(partidaService.buscarPorId(id));
     }
 

@@ -28,13 +28,13 @@ public class PaisController {
     }
 
     @GetMapping("/paises/{id}")
-    public ResponseEntity<Pais> listPaisById(@PathVariable long id) {
+    public ResponseEntity<Pais> listPaisById(@PathVariable Long id) {
         return ResponseEntity.ok(paisService.buscarPorId(id));
     }
 
     @GetMapping("/paises/{id}/cidades")
     public ResponseEntity<List<CidadeDTO>> listCidadesDoPais(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam(required = false) String nome
     ) {
         return ResponseEntity.ok(cidadeService.listarCidade(nome, null, id));
@@ -42,7 +42,7 @@ public class PaisController {
 
     @GetMapping("/paises/{id}/ligas")
     public ResponseEntity<List<LigaDTO>> listLigasDoPais(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam (required = false) String nome
     ) {
         return ResponseEntity.ok(ligaService.listarLiga(nome, null, id));
@@ -50,7 +50,7 @@ public class PaisController {
 
     @GetMapping("/paises/{id}/clubes")
     public ResponseEntity<List<ClubeDTO>> listClubesDoPais(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) Long cidadeId
     ) {
@@ -59,7 +59,7 @@ public class PaisController {
 
     @GetMapping("/paises/{id}/jogadores")
     public ResponseEntity<List<JogadorDTO>> listJogadoresDoPais(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam(required = false) String nome
     ) {
         return ResponseEntity.ok(jogadorService.listarJogador(nome, null, id));
@@ -67,7 +67,7 @@ public class PaisController {
 
     @GetMapping("/paises/{id}/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnicosDoPais(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam (required = false) String nome
     ) {
         return ResponseEntity.ok(tecnicoService.listarTecnico(nome, null, id));

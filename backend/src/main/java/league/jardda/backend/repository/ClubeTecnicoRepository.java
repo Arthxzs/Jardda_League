@@ -15,6 +15,7 @@ public interface ClubeTecnicoRepository extends JpaRepository<ClubeTecnico, Long
             JOIN FETCH ct.tecnico
             WHERE ct.clube.clubeId = :clubeId
             AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
+            ORDER BY ct.inicioContratoTecnico DESC
           """)
     List<ClubeTecnico> buscarPorClube(@Param("clubeId") Long clubeId,
                                       @Param("ativo") boolean apenasAtivos);
@@ -25,6 +26,7 @@ public interface ClubeTecnicoRepository extends JpaRepository<ClubeTecnico, Long
             JOIN FETCH ct.tecnico
             WHERE ct.tecnico.tecnicoId = :tecnicoId
             AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
+            ORDER BY ct.inicioContratoTecnico DESC
           """)
     List<ClubeTecnico> buscarPorTecnico(@Param("tecnicoId") Long tecnicoId,
                                         @Param("ativo") boolean apenasAtivos);

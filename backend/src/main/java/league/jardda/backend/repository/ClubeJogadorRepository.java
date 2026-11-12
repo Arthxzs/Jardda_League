@@ -15,6 +15,7 @@ public interface ClubeJogadorRepository extends JpaRepository<ClubeJogador, Long
             JOIN FETCH cj.clube
             WHERE cj.clube.clubeId = :clubeId
             AND (:ativo = false OR cj.terminoContratoJogador IS NULL)
+            ORDER BY cj.inicioContratoJogador DESC
           """)
     List<ClubeJogador> buscarPorClube(
             @Param("clubeId") Long clubeId,

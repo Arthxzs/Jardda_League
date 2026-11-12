@@ -15,6 +15,7 @@ public interface ClubeLigaRepository extends JpaRepository<ClubeLiga, Long> {
             JOIN FETCH cl.liga
             WHERE cl.clube.clubeId = :clubeId
             AND (:ativo = false OR cl.periodoSaida IS NULL)
+            ORDER BY cl.periodoEntrada DESC
           """)
     List<ClubeLiga> buscarPorClube(@Param("clubeId") Long clubeId,
                                    @Param("ativo") boolean apenasAtivos);
@@ -25,6 +26,7 @@ public interface ClubeLigaRepository extends JpaRepository<ClubeLiga, Long> {
             JOIN FETCH cl.liga
             WHERE cl.liga.ligaId = :ligaId
             AND (:ativo = false OR cl.periodoSaida IS NULL)
+            ORDER BY cl.periodoEntrada DESC
           """)
     List<ClubeLiga> buscarPorLiga(@Param("ligaId") Long ligaId,
                                   @Param("ativo") boolean apenasAtivos);

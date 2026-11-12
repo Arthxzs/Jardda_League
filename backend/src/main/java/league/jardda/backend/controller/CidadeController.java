@@ -1,8 +1,10 @@
 package league.jardda.backend.controller;
 
 import league.jardda.backend.dataTransferObj.CidadeDTO;
+import league.jardda.backend.dataTransferObj.ClubeDTO;
 import league.jardda.backend.dataTransferObj.EstadioDTO;
 import league.jardda.backend.service.CidadeService;
+import league.jardda.backend.service.ClubeService;
 import league.jardda.backend.service.EstadioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import java.util.List;
 public class CidadeController {
     private final CidadeService cidadeService;
     private final EstadioService estadioService;
+    private final ClubeService clubeService;
 
     @GetMapping("/cidades")
     public ResponseEntity<List<CidadeDTO>> listAllCidade(
@@ -41,5 +44,13 @@ public class CidadeController {
             @RequestParam (required = false) Long clubeId
     ) {
         return ResponseEntity.ok(estadioService.listarEstadio(nome, clube, id, clubeId));
+    }
+
+    @GetMapping("/cidades/{id}/clubes")
+    public ResponseEntity<List<ClubeDTO>> listClubesDaCidade(
+            @PathVariable long id,
+            @RequestParam(required = false) String nome
+    ) {
+        return ResponseEntity.ok(clubeService.listarClube(nome, null, id, null));
     }
 }
