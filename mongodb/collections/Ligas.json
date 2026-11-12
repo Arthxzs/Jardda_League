@@ -1,0 +1,12 @@
+{
+  "_id": "Int32",
+
+  "nome_liga": "String",
+  "categoria_liga": "String | null",
+  "estilo_liga": "String",
+
+  "pais": {
+    "nome_pais": "String",
+    "sigla": "String"
+  }
+}

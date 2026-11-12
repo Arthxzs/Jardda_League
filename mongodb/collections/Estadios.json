@@ -1,0 +1,18 @@
+{
+  "_id": "Int32",
+
+  "nome_estadio": "String",
+
+  "cidade": {
+    "nome_cidade": "String",
+    "pais": {
+      "nome_pais": "String",
+      "sigla": "String"
+    }
+  },
+
+  "clube": {
+    "clube_id": "Int32",
+    "nome_clube": "String"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "_id": "Int32",
+
+  "data_partida": "Date",
+  "publico_partida": "Int32",
+  "rodada_partida": "Int32 | null",
+
+  "mandante": {
+    "clube_id": "Int32",
+    "nome_clube": "String"
+  },
+
+  "visitante": {
+    "clube_id": "Int32",
+    "nome_clube": "String"
+  },
+
+  "liga": {
+    "liga_id": "Int32",
+    "nome_liga": "String"
+  },
+
+  "estadio": {
+    "estadio_id": "Int32",
+    "nome_estadio": "String"
+  },
+
+  "estatisticas": {
+    "mandante": {
+      "gols": "Int32",
+      "cartoes": "Int32",
+      "chutes": "Int32"
+    },
+    "visitante": {
+      "gols": "Int32",
+      "cartoes": "Int32",
+      "chutes": "Int32"
+    }
+  }
+}

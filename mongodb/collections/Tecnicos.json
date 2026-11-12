@@ -1,0 +1,22 @@
+{
+  "_id": "Int32",
+
+  "nome_tecnico": "String",
+  "aniversario_tecnico": "Date",
+
+  "pais": {
+    "nome_pais": "String",
+    "sigla": "String"
+  },
+
+  "contratos": [
+    {
+      "clube_id": "Int32",
+      "nome_clube": "String",
+      "inicio_contrato": "Date",
+      "previsao_contrato": "Date",
+      "termino_contrato": "Date | null",
+      "valor_salario": "Decimal128"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "_id": "Int32",
+
+  "nome_clube": "String",
+
+  "cidade": {
+    "nome_cidade": "String",
+    "pais": {
+      "nome_pais": "String",
+      "sigla": "String"
+    }
+  },
+
+  "ligas": [
+    {
+      "liga_id": "Int32",
+      "nome_liga": "String",
+      "periodo_entrada": "Date",
+      "periodo_saida": "Date | null"
+    }
+  ]
+}

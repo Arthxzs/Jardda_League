@@ -1,0 +1,24 @@
+{
+  "_id": "Int32",
+
+  "nome_jogador": "String",
+  "aniversario_jogador": "Date",
+  "posicao": "String",
+  "lesionado": "Boolean",
+
+  "pais": {
+    "nome_pais": "String",
+    "sigla": "String"
+  },
+
+  "contratos": [
+    {
+      "clube_id": "Int32",
+      "nome_clube": "String",
+      "inicio_contrato": "Date",
+      "previsao_contrato": "Date",
+      "termino_contrato": "Date | null",
+      "valor_salario": "Decimal128"
+    }
+  ]
+}
