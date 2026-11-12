@@ -2,7 +2,7 @@
 
 Banco de dados relacional de futebol (clubes, ligas, estádios, jogadores, técnicos, contratos e partidas), modelado em PostgreSQL, com controle de acesso por roles. O modelo também foi convertido para MongoDB, por pedido do professor da disciplina, apenas como exercício acadêmico.
 
-> **Aviso sobre os dados:** os nomes de **clubes, ligas e estádios** são reais. **Jogadores, técnicos, contratos, salários, partidas e estatísticas são fictícios**, criados apenas para testar o modelo. Nenhum dado deste repositório representa fatos reais sobre pessoas.
+> **Aviso sobre os dados:** os nomes de **clubes, ligas e estádios** são reais. **Jogadores, técnicos, contratos, salários, partidas e estatísticas são fictícios**, criados apenas para testar o modelo. Nenhum dado deste repositório representa fatos reais sobre pessoas ou eventos reais.
 
 ## Problema
 
@@ -133,4 +133,4 @@ Essas regras passam a ser responsabilidade da aplicação.
 
 ## Uso de IA
 
-Usei o Claude (Anthropic) e o ChatGPT(OpenIA) como ferramentas de **consulta e de melhoria da arquitetura**: revisão do schema, discussão das alternativas de políticas de acesso e dos trade-offs entre PostgreSQL e MongoDB, montagem deste README e explicação de erros. A IA também gerou os dados utilizados no banco, devido ao tamanho do escopo do banco, além de auxiliar na construção dos scripts do MongoDB. As decisões de escopo e de modelagem, a execução dos scripts e os testes foram feitos pela equipe.
+Usei o Claude (Anthropic) e o ChatGPT (OpenIA) como ferramentas de **consulta e de melhoria da arquitetura**: revisão do schema, discussão das alternativas de políticas de acesso e dos trade-offs entre PostgreSQL e MongoDB, montagem deste README e explicação de erros. A IA também gerou os dados utilizados no banco, devido ao tamanho do escopo do banco, além de auxiliar na construção dos scripts do MongoDB. As decisões de escopo e de modelagem, a execução dos scripts e os testes foram feitos pela equipe.
