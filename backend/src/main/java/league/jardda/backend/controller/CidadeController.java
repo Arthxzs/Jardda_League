@@ -24,10 +24,10 @@ public class CidadeController {
 
     @GetMapping("/cidades")
     public ResponseEntity<List<CidadeDTO>> listAllCidade(
-            @RequestParam (required = false) String nome,
-            @RequestParam (required = false) String pais,
-            @RequestParam (required = false) Long paisId
-    ){
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String pais,
+            @RequestParam(required = false) Long paisId
+    ) {
         return ResponseEntity.ok(cidadeService.listarCidade(nome, pais, paisId));
     }
 
@@ -39,9 +39,9 @@ public class CidadeController {
     @GetMapping("/cidades/{id}/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadiosDaCidade(
             @PathVariable long id,
-            @RequestParam (required = false) String nome,
-            @RequestParam (required = false) String clube,
-            @RequestParam (required = false) Long clubeId
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String clube,
+            @RequestParam(required = false) Long clubeId
     ) {
         return ResponseEntity.ok(estadioService.listarEstadio(nome, clube, id, clubeId));
     }

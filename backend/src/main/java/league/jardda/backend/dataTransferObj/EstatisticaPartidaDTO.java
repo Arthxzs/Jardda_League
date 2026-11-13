@@ -8,4 +8,5 @@ public record EstatisticaPartidaDTO(
         Integer clubeForaCartoes,
         Integer clubeCasaChutes,
         Integer clubeForaChutes
-) {}
+) {
+}

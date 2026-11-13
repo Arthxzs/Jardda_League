@@ -13,4 +13,5 @@ public record ClubeTecnicoDTO(
         LocalDate previsaoTermino,
         LocalDate terminoContrato,
         BigDecimal valorSalario
-) {}
+) {
+}

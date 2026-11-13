@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 public class StringFormatter {
     public static String toCapitalize(String base) {
         return Arrays.stream(base
-                .toLowerCase()
-                .split(" "))
+                        .toLowerCase()
+                        .split(" "))
                 .map(StringUtils::capitalize)
                 .collect(Collectors.joining(" "));
     }

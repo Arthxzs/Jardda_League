@@ -21,10 +21,10 @@ public class TecnicoController {
 
     @GetMapping("/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnico(
-            @RequestParam (required = false) String nome,
-            @RequestParam (required = false) String pais,
-            @RequestParam (required = false) Long paisId
-    ){
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String pais,
+            @RequestParam(required = false) Long paisId
+    ) {
         return ResponseEntity.ok(tecnicoService.listarTecnico(nome, pais, paisId));
     }
 

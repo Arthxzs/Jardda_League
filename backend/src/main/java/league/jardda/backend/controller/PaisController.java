@@ -23,7 +23,7 @@ public class PaisController {
     private final TecnicoService tecnicoService;
 
     @GetMapping("/paises")
-    public ResponseEntity<List<Pais>> listAllPais(){
+    public ResponseEntity<List<Pais>> listAllPais() {
         return ResponseEntity.ok(paisService.listarPais());
     }
 
@@ -43,7 +43,7 @@ public class PaisController {
     @GetMapping("/paises/{id}/ligas")
     public ResponseEntity<List<LigaDTO>> listLigasDoPais(
             @PathVariable Long id,
-            @RequestParam (required = false) String nome
+            @RequestParam(required = false) String nome
     ) {
         return ResponseEntity.ok(ligaService.listarLiga(nome, null, id));
     }
@@ -68,7 +68,7 @@ public class PaisController {
     @GetMapping("/paises/{id}/tecnicos")
     public ResponseEntity<List<TecnicoDTO>> listTecnicosDoPais(
             @PathVariable Long id,
-            @RequestParam (required = false) String nome
+            @RequestParam(required = false) String nome
     ) {
         return ResponseEntity.ok(tecnicoService.listarTecnico(nome, null, id));
     }

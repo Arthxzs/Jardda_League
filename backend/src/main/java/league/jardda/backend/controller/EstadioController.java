@@ -21,11 +21,11 @@ public class EstadioController {
 
     @GetMapping("/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadio(
-            @RequestParam (required = false) String nome,
-            @RequestParam (required = false) String clube,
-            @RequestParam (required = false) Long cidadeId,
-            @RequestParam (required = false) Long clubeId
-    ){
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String clube,
+            @RequestParam(required = false) Long cidadeId,
+            @RequestParam(required = false) Long clubeId
+    ) {
         return ResponseEntity.ok(estadioService.listarEstadio(nome, clube, cidadeId, clubeId));
     }
 
@@ -37,11 +37,11 @@ public class EstadioController {
     @GetMapping("/estadios/{id}/partidas")
     public ResponseEntity<List<PartidaDTO>> listPartidasDoEstadio(
             @PathVariable Long id,
-            @RequestParam (required = false) String clubeCasa,
-            @RequestParam (required = false) String clubeFora,
-            @RequestParam (required = false) Integer rodada,
-            @RequestParam (required = false) Long ligaId
+            @RequestParam(required = false) String clubeCasa,
+            @RequestParam(required = false) String clubeFora,
+            @RequestParam(required = false) Integer rodada,
+            @RequestParam(required = false) Long ligaId
     ) {
-        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId,  null, id));
+        return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId, null, id));
     }
 }

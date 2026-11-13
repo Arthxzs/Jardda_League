@@ -39,7 +39,7 @@ public class PartidaService {
         parameterValidator.validarEstadio(estadioId);
 
         List<PartidaDTO> partidas = partidaRepository
-                .filtrar(clubeCasa, clubeFora, rodada, ligaId, estadio, estadioId,null)
+                .filtrar(clubeCasa, clubeFora, rodada, ligaId, estadio, estadioId, null)
                 .stream()
                 .map(this::toDTO)
                 .toList();
@@ -70,9 +70,9 @@ public class PartidaService {
         return partidas;
     }
 
-    public PartidaDTO buscarPorId(long id) {
+    public PartidaDTO buscarPorId(Long id) {
         return partidaRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Partida com id " + id  + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Partida com id " + id + " não encontrada"));
     }
 }

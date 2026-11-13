@@ -21,13 +21,13 @@ public class PartidaController {
 
     @GetMapping("/partidas")
     public ResponseEntity<List<PartidaDTO>> listPartida(
-            @RequestParam (required = false) String clubeCasa,
-            @RequestParam (required = false) String clubeFora,
-            @RequestParam (required = false) Integer rodada,
-            @RequestParam (required = false) Long ligaId,
-            @RequestParam (required = false) String estadio,
-            @RequestParam (required = false) Long estadioId
-    ){
+            @RequestParam(required = false) String clubeCasa,
+            @RequestParam(required = false) String clubeFora,
+            @RequestParam(required = false) Integer rodada,
+            @RequestParam(required = false) Long ligaId,
+            @RequestParam(required = false) String estadio,
+            @RequestParam(required = false) Long estadioId
+    ) {
         return ResponseEntity.ok(partidaService.listarPartida(clubeCasa, clubeFora, rodada, ligaId, estadio, estadioId));
     }
 

@@ -21,13 +21,13 @@ public interface ClubeTecnicoRepository extends JpaRepository<ClubeTecnico, Long
                                       @Param("ativo") boolean apenasAtivos);
 
     @Query("""
-            SELECT ct FROM ClubeTecnico ct
-            JOIN FETCH ct.clube
-            JOIN FETCH ct.tecnico
-            WHERE ct.tecnico.tecnicoId = :tecnicoId
-            AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
-            ORDER BY ct.inicioContratoTecnico DESC
-          """)
+              SELECT ct FROM ClubeTecnico ct
+              JOIN FETCH ct.clube
+              JOIN FETCH ct.tecnico
+              WHERE ct.tecnico.tecnicoId = :tecnicoId
+              AND (:ativo = false OR ct.terminoContratoTecnico IS NULL)
+              ORDER BY ct.inicioContratoTecnico DESC
+            """)
     List<ClubeTecnico> buscarPorTecnico(@Param("tecnicoId") Long tecnicoId,
                                         @Param("ativo") boolean apenasAtivos);
 }

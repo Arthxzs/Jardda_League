@@ -15,6 +15,7 @@ public class ParameterValidator {
     private final PartidaRepository partidaRepository;
     private final TecnicoRepository tecnicoRepository;
     private final EstadioRepository estadioRepository;
+    private final JogadorRepository jogadorRepository;
 
     public void validarPais(Long paisId) {
         if (paisId != null && !paisRepository.existsById(paisId)) {
@@ -55,6 +56,12 @@ public class ParameterValidator {
     public void validarEstadio(Long estadioId) {
         if (estadioId != null && !estadioRepository.existsById(estadioId)) {
             throw new NotFoundException("Estádio com id " + estadioId + " não encontrado");
+        }
+    }
+
+    public void validarJogador(Long jogadorId) {
+        if (jogadorId != null && !jogadorRepository.existsById(jogadorId)) {
+            throw new NotFoundException("Jogador com id " + jogadorId + " não encontrado");
         }
     }
 }

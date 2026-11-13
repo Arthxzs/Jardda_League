@@ -13,4 +13,5 @@ public record ClubeJogadorDTO(
         LocalDate previsaoTermino,
         LocalDate terminoContrato,
         BigDecimal valorSalario
-) {}
+) {
+}

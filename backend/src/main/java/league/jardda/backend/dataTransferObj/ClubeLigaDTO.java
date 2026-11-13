@@ -10,4 +10,5 @@ public record ClubeLigaDTO(
         String ligaNome,
         LocalDate entrada,
         LocalDate saida
-) {}
+) {
+}

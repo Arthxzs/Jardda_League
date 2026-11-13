@@ -17,6 +17,11 @@ public class ClubeJogadorService {
     private final ClubeJogadorRepository clubeJogadorRepository;
     private final ParameterValidator parameterValidator;
 
+    private List<ClubeJogador> buscarContratos(Long jogadorId, boolean apenasAtivos) {
+        parameterValidator.validarJogador(jogadorId);
+        return clubeJogadorRepository.buscarPorJogador(jogadorId, apenasAtivos);
+    }
+
     public List<ClubeJogadorDTO> listarElenco(Long clubeId, boolean apenasAtivos) {
         parameterValidator.validarClube(clubeId);
 
@@ -27,6 +32,27 @@ public class ClubeJogadorService {
         }
 
         return contratos.stream().map(this::toDTO).toList();
+    }
+
+    public List<ClubeJogadorDTO> listarPorJogador(Long jogadorId, boolean apenasAtivos) {
+        List<ClubeJogador> contratos = buscarContratos(jogadorId, apenasAtivos);
+
+        if (contratos.isEmpty()) {
+            throw new NotFoundException("Jogador com id " + jogadorId + " não possui contratos");
+        }
+
+        return contratos.stream().map(this::toDTO).toList();
+    }
+
+    public ClubeJogadorDTO buscarClubeAtual(Long jogadorId) {
+        List<ClubeJogador> contratos = buscarContratos(jogadorId, true);
+
+        if (contratos.isEmpty()) {
+            throw new NotFoundException("Jogador com id " + jogadorId + " não possui clube atual");
+        }
+
+        return contratos.stream().map(this::toDTO).toList().getFirst();
+
     }
 
     private ClubeJogadorDTO toDTO(ClubeJogador cj) {
