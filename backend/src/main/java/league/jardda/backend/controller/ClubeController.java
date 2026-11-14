@@ -1,7 +1,17 @@
 package league.jardda.backend.controller;
 
-import league.jardda.backend.dataTransferObj.*;
-import league.jardda.backend.service.*;
+import league.jardda.backend.dataTransferObj.ClubeDTO;
+import league.jardda.backend.dataTransferObj.ClubeJogadorDTO;
+import league.jardda.backend.dataTransferObj.ClubeLigaDTO;
+import league.jardda.backend.dataTransferObj.ClubeTecnicoDTO;
+import league.jardda.backend.dataTransferObj.EstadioDTO;
+import league.jardda.backend.dataTransferObj.PartidaDTO;
+import league.jardda.backend.service.ClubeJogadorService;
+import league.jardda.backend.service.ClubeLigaService;
+import league.jardda.backend.service.ClubeService;
+import league.jardda.backend.service.ClubeTecnicoService;
+import league.jardda.backend.service.EstadioService;
+import league.jardda.backend.service.PartidaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +42,7 @@ public class ClubeController {
     }
 
     @GetMapping("/clubes/{id}")
-    public ResponseEntity<ClubeDTO> listClubeById(@PathVariable Long id) {
+    public ResponseEntity<ClubeDTO> getClubeById(@PathVariable Long id) {
         return ResponseEntity.ok(clubeService.buscarPorId(id));
     }
 
@@ -56,7 +66,7 @@ public class ClubeController {
     }
 
     @GetMapping("/clubes/{id}/elenco")
-    public ResponseEntity<List<ClubeJogadorDTO>> elenco(
+    public ResponseEntity<List<ClubeJogadorDTO>> listElenco(
             @PathVariable Long id,
             @RequestParam(defaultValue = "false") boolean apenasAtivos
     ) {
@@ -64,16 +74,18 @@ public class ClubeController {
     }
 
     @GetMapping("/clubes/{id}/tecnicos")
-    public ResponseEntity<List<ClubeTecnicoDTO>> tecnicosDoClube(
+    public ResponseEntity<List<ClubeTecnicoDTO>> listTecnicosDoClube(
             @PathVariable Long id,
-            @RequestParam(defaultValue = "false") boolean apenasAtivos) {
+            @RequestParam(defaultValue = "false") boolean apenasAtivos
+    ) {
         return ResponseEntity.ok(clubeTecnicoService.listarPorClube(id, apenasAtivos));
     }
 
     @GetMapping("/clubes/{id}/ligas")
     public ResponseEntity<List<ClubeLigaDTO>> ligasDoClube(
             @PathVariable Long id,
-            @RequestParam(defaultValue = "false") boolean apenasAtivos) {
+            @RequestParam(defaultValue = "false") boolean apenasAtivos
+    ) {
         return ResponseEntity.ok(clubeLigaService.listarPorClube(id, apenasAtivos));
     }
 }

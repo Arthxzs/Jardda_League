@@ -37,9 +37,9 @@ public class CidadeService {
         return cidades;
     }
 
-    public CidadeDTO buscarPorId(long id) {
+    public CidadeDTO buscarPorId(Long id) {
         return cidadeRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Cidade com id " + id + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Cidade com id " + id + " não encontrada."));
     }
 }

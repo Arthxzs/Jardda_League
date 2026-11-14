@@ -34,14 +34,14 @@ public class JogadorService {
                 .stream().map(this::toDTO).toList();
 
         if (jogadores.isEmpty()) {
-            throw new NotFoundException("Nenhum jogador encontrado para os filtros informados");
+            throw new NotFoundException("Nenhum jogador encontrado para os filtros informados.");
         }
         return jogadores;
     }
 
-    public JogadorDTO buscarPorId(long id) {
+    public JogadorDTO buscarPorId(Long id) {
         return jogadorRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Jogador com id " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Jogador com id " + id + " não encontrado."));
     }
 }

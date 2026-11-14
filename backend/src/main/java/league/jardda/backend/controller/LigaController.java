@@ -32,7 +32,7 @@ public class LigaController {
     }
 
     @GetMapping("/ligas/{id}")
-    public ResponseEntity<LigaDTO> listLigaById(@PathVariable Long id) {
+    public ResponseEntity<LigaDTO> getLigaById(@PathVariable Long id) {
         return ResponseEntity.ok(ligaService.buscarPorId(id));
     }
 
@@ -49,7 +49,7 @@ public class LigaController {
     }
 
     @GetMapping("/ligas/{id}/clubes")
-    public ResponseEntity<List<ClubeLigaDTO>> clubesDaLiga(
+    public ResponseEntity<List<ClubeLigaDTO>> listClubesDaLiga(
             @PathVariable Long id,
             @RequestParam(defaultValue = "false") boolean apenasAtivos) {
         return ResponseEntity.ok(clubeLigaService.listarPorLiga(id, apenasAtivos));

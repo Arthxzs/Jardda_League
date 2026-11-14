@@ -34,14 +34,14 @@ public class EstadioService {
                 .stream().map(this::toDTO).toList();
 
         if (estadios.isEmpty()) {
-            throw new NotFoundException("Nenhum estádio encontrado para os filtros informados");
+            throw new NotFoundException("Nenhum estádio encontrado para os filtros informados.");
         }
         return estadios;
     }
 
-    public EstadioDTO buscarPorId(long id) {
+    public EstadioDTO buscarPorId(Long id) {
         return estadioRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Estádio com id " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Estádio com id " + id + " não encontrado."));
     }
 }

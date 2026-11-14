@@ -23,7 +23,7 @@ public class CidadeController {
     private final ClubeService clubeService;
 
     @GetMapping("/cidades")
-    public ResponseEntity<List<CidadeDTO>> listAllCidade(
+    public ResponseEntity<List<CidadeDTO>> listCidade(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String pais,
             @RequestParam(required = false) Long paisId
@@ -32,13 +32,13 @@ public class CidadeController {
     }
 
     @GetMapping("/cidades/{id}")
-    public ResponseEntity<CidadeDTO> listCidadeById(@PathVariable long id) {
+    public ResponseEntity<CidadeDTO> getCidadeById(@PathVariable Long id) {
         return ResponseEntity.ok(cidadeService.buscarPorId(id));
     }
 
     @GetMapping("/cidades/{id}/estadios")
     public ResponseEntity<List<EstadioDTO>> listEstadiosDaCidade(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String clube,
             @RequestParam(required = false) Long clubeId
@@ -48,7 +48,7 @@ public class CidadeController {
 
     @GetMapping("/cidades/{id}/clubes")
     public ResponseEntity<List<ClubeDTO>> listClubesDaCidade(
-            @PathVariable long id,
+            @PathVariable Long id,
             @RequestParam(required = false) String nome
     ) {
         return ResponseEntity.ok(clubeService.listarClube(nome, null, id, null));

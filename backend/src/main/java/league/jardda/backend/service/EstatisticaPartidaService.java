@@ -20,7 +20,7 @@ public class EstatisticaPartidaService {
         return estatisticaPartidaRepository.findById(partidaId)
                 .map(this::toDTO)
                 .orElseThrow(() -> new NotFoundException(
-                        "Partida com id " + partidaId + " não possui estatísticas"));
+                        "Partida com id " + partidaId + " não possui estatísticas."));
     }
 
     private EstatisticaPartidaDTO toDTO(EstatisticaPartida e) {

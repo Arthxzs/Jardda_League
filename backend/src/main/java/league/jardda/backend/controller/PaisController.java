@@ -1,8 +1,17 @@
 package league.jardda.backend.controller;
 
-import league.jardda.backend.dataTransferObj.*;
+import league.jardda.backend.dataTransferObj.CidadeDTO;
+import league.jardda.backend.dataTransferObj.ClubeDTO;
+import league.jardda.backend.dataTransferObj.JogadorDTO;
+import league.jardda.backend.dataTransferObj.LigaDTO;
+import league.jardda.backend.dataTransferObj.TecnicoDTO;
 import league.jardda.backend.entity.Pais;
-import league.jardda.backend.service.*;
+import league.jardda.backend.service.CidadeService;
+import league.jardda.backend.service.ClubeService;
+import league.jardda.backend.service.JogadorService;
+import league.jardda.backend.service.LigaService;
+import league.jardda.backend.service.PaisService;
+import league.jardda.backend.service.TecnicoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +37,7 @@ public class PaisController {
     }
 
     @GetMapping("/paises/{id}")
-    public ResponseEntity<Pais> listPaisById(@PathVariable Long id) {
+    public ResponseEntity<Pais> getPaisById(@PathVariable Long id) {
         return ResponseEntity.ok(paisService.buscarPorId(id));
     }
 

@@ -34,14 +34,14 @@ public class ClubeService {
                 .stream().map(this::toDTO).toList();
 
         if (clubes.isEmpty()) {
-            throw new NotFoundException("Nenhum clube encontrado para os filtros informados");
+            throw new NotFoundException("Nenhum clube encontrado para os filtros informados.");
         }
         return clubes;
     }
 
-    public ClubeDTO buscarPorId(long id) {
+    public ClubeDTO buscarPorId(Long id) {
         return clubeRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Clube com id " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Clube com id " + id + " não encontrado."));
     }
 }

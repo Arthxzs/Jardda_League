@@ -33,14 +33,14 @@ public class LigaService {
                 .stream().map(this::toDTO).toList();
 
         if (ligas.isEmpty()) {
-            throw new NotFoundException("Nenhuma liga encontrada para os filtros informados");
+            throw new NotFoundException("Nenhuma liga encontrada para os filtros informados.");
         }
         return ligas;
     }
 
-    public LigaDTO buscarPorId(long id) {
+    public LigaDTO buscarPorId(Long id) {
         return ligaRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Liga com id " + id + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Liga com id " + id + " não encontrada."));
     }
 }

@@ -29,12 +29,12 @@ public class TecnicoController {
     }
 
     @GetMapping("/tecnicos/{id}")
-    public ResponseEntity<TecnicoDTO> listTecnicoById(@PathVariable Long id) {
+    public ResponseEntity<TecnicoDTO> getTecnicoById(@PathVariable Long id) {
         return ResponseEntity.ok(tecnicoService.buscarPorId(id));
     }
 
     @GetMapping("/tecnicos/{id}/contratos")
-    public ResponseEntity<List<ClubeTecnicoDTO>> contratosDoTecnico(
+    public ResponseEntity<List<ClubeTecnicoDTO>> listContratosDoTecnico(
             @PathVariable Long id,
             @RequestParam(defaultValue = "false") boolean apenasAtivos) {
         return ResponseEntity.ok(clubeTecnicoService.listarPorTecnico(id, apenasAtivos));

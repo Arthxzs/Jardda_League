@@ -28,7 +28,7 @@ public class ClubeJogadorService {
         List<ClubeJogador> contratos = clubeJogadorRepository.buscarPorClube(clubeId, apenasAtivos);
 
         if (contratos.isEmpty()) {
-            throw new NotFoundException("Clube com id " + clubeId + " não possui jogadores");
+            throw new NotFoundException("Clube com id " + clubeId + " não possui jogadores.");
         }
 
         return contratos.stream().map(this::toDTO).toList();
@@ -38,7 +38,7 @@ public class ClubeJogadorService {
         List<ClubeJogador> contratos = buscarContratos(jogadorId, apenasAtivos);
 
         if (contratos.isEmpty()) {
-            throw new NotFoundException("Jogador com id " + jogadorId + " não possui contratos");
+            throw new NotFoundException("Jogador com id " + jogadorId + " não possui contratos.");
         }
 
         return contratos.stream().map(this::toDTO).toList();
@@ -48,11 +48,10 @@ public class ClubeJogadorService {
         List<ClubeJogador> contratos = buscarContratos(jogadorId, true);
 
         if (contratos.isEmpty()) {
-            throw new NotFoundException("Jogador com id " + jogadorId + " não possui clube atual");
+            throw new NotFoundException("Jogador com id " + jogadorId + " não possui clube atual.");
         }
 
-        return contratos.stream().map(this::toDTO).toList().getFirst();
-
+        return toDTO(contratos.getFirst());
     }
 
     private ClubeJogadorDTO toDTO(ClubeJogador cj) {

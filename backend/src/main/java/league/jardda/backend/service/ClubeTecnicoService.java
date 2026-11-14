@@ -21,7 +21,7 @@ public class ClubeTecnicoService {
         parameterValidator.validarClube(clubeId);
         List<ClubeTecnico> contratos = clubeTecnicoRepository.buscarPorClube(clubeId, apenasAtivos);
         if (contratos.isEmpty()) {
-            throw new NotFoundException("Clube com id " + clubeId + " não possui técnicos");
+            throw new NotFoundException("Clube com id " + clubeId + " não possui técnicos.");
         }
         return contratos.stream().map(this::toDTO).toList();
     }
@@ -30,7 +30,7 @@ public class ClubeTecnicoService {
         parameterValidator.validarTecnico(tecnicoId);
         List<ClubeTecnico> contratos = clubeTecnicoRepository.buscarPorTecnico(tecnicoId, apenasAtivos);
         if (contratos.isEmpty()) {
-            throw new NotFoundException("Técnico com id " + tecnicoId + " não possui contratos");
+            throw new NotFoundException("Técnico com id " + tecnicoId + " não possui contratos.");
         }
         return contratos.stream().map(this::toDTO).toList();
     }

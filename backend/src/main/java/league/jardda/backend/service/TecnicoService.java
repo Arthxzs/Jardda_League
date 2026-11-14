@@ -32,14 +32,14 @@ public class TecnicoService {
                 .stream().map(this::toDTO).toList();
 
         if (tecnicos.isEmpty()) {
-            throw new NotFoundException("Nenhum técnico encontrado para os filtros informados");
+            throw new NotFoundException("Nenhum técnico encontrado para os filtros informados.");
         }
         return tecnicos;
     }
 
-    public TecnicoDTO buscarPorId(long id) {
+    public TecnicoDTO buscarPorId(Long id) {
         return tecnicoRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Técnico com id " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Técnico com id " + id + " não encontrado."));
     }
 }

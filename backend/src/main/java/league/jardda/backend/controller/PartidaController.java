@@ -32,12 +32,12 @@ public class PartidaController {
     }
 
     @GetMapping("/partidas/{id}")
-    public ResponseEntity<PartidaDTO> listPartidaById(@PathVariable Long id) {
+    public ResponseEntity<PartidaDTO> getPartidaById(@PathVariable Long id) {
         return ResponseEntity.ok(partidaService.buscarPorId(id));
     }
 
     @GetMapping("/partidas/{id}/estatisticas")
-    public ResponseEntity<EstatisticaPartidaDTO> estatisticas(@PathVariable Long id) {
+    public ResponseEntity<EstatisticaPartidaDTO> getEstatisticasPartida(@PathVariable Long id) {
         return ResponseEntity.ok(estatisticaPartidaService.buscarPorPartida(id));
     }
 }

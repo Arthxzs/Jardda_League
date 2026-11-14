@@ -20,7 +20,7 @@ public class JogadorController {
     private final ClubeJogadorService clubeJogadorService;
 
     @GetMapping("/jogadores")
-    public ResponseEntity<List<JogadorDTO>> listAllJogador(
+    public ResponseEntity<List<JogadorDTO>> listJogador(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String pais,
             @RequestParam(required = false) Long paisId
@@ -29,7 +29,7 @@ public class JogadorController {
     }
 
     @GetMapping("/jogadores/{id}")
-    public ResponseEntity<JogadorDTO> listJogadorById(@PathVariable Long id) {
+    public ResponseEntity<JogadorDTO> getJogadorById(@PathVariable Long id) {
         return ResponseEntity.ok(jogadorService.buscarPorId(id));
     }
 
@@ -42,7 +42,7 @@ public class JogadorController {
     }
 
     @GetMapping("/jogadores/{id}/clube-atual")
-    public ResponseEntity<ClubeJogadorDTO> listContratosDeJogador(
+    public ResponseEntity<ClubeJogadorDTO> getClubeAtual(
             @PathVariable Long id
     ) {
         return ResponseEntity.ok(clubeJogadorService.buscarClubeAtual(id));

@@ -30,7 +30,7 @@ public class EstadioController {
     }
 
     @GetMapping("/estadios/{id}")
-    public ResponseEntity<EstadioDTO> listEstadioById(@PathVariable Long id) {
+    public ResponseEntity<EstadioDTO> getEstadioById(@PathVariable Long id) {
         return ResponseEntity.ok(estadioService.buscarPorId(id));
     }
 

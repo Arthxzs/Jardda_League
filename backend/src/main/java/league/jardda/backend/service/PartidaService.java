@@ -45,7 +45,7 @@ public class PartidaService {
                 .toList();
 
         if (partidas.isEmpty()) {
-            throw new NotFoundException("Nenhuma partida encontrada para os filtros informados");
+            throw new NotFoundException("Nenhuma partida encontrada para os filtros informados.");
         }
         return partidas;
     }
@@ -57,7 +57,6 @@ public class PartidaService {
         parameterValidator.validarLiga(ligaId);
         parameterValidator.validarEstadio(estadioId);
 
-
         List<PartidaDTO> partidas = partidaRepository
                 .filtrar(null, null, rodada, ligaId, estadio, estadioId, clubeId)
                 .stream()
@@ -65,7 +64,7 @@ public class PartidaService {
                 .toList();
 
         if (partidas.isEmpty()) {
-            throw new NotFoundException("Clube com id " + clubeId + " não possui partidas");
+            throw new NotFoundException("Clube com id " + clubeId + " não possui partidas.");
         }
         return partidas;
     }
@@ -73,6 +72,6 @@ public class PartidaService {
     public PartidaDTO buscarPorId(Long id) {
         return partidaRepository.findById(id)
                 .map(this::toDTO)
-                .orElseThrow(() -> new NotFoundException("Partida com id " + id + " não encontrada"));
+                .orElseThrow(() -> new NotFoundException("Partida com id " + id + " não encontrada."));
     }
 }

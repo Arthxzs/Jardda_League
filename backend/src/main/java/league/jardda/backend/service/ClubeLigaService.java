@@ -21,7 +21,7 @@ public class ClubeLigaService {
         parameterValidator.validarClube(clubeId);
         List<ClubeLiga> vinculos = clubeLigaRepository.buscarPorClube(clubeId, apenasAtivos);
         if (vinculos.isEmpty()) {
-            throw new NotFoundException("Clube com id " + clubeId + " não possui ligas");
+            throw new NotFoundException("Clube com id " + clubeId + " não possui ligas.");
         }
         return vinculos.stream().map(this::toDTO).toList();
     }
@@ -30,7 +30,7 @@ public class ClubeLigaService {
         parameterValidator.validarLiga(ligaId);
         List<ClubeLiga> vinculos = clubeLigaRepository.buscarPorLiga(ligaId, apenasAtivos);
         if (vinculos.isEmpty()) {
-            throw new NotFoundException("Liga com id " + ligaId + " não possui clubes");
+            throw new NotFoundException("Liga com id " + ligaId + " não possui clubes.");
         }
         return vinculos.stream().map(this::toDTO).toList();
     }

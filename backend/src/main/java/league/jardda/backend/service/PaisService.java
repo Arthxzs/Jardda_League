@@ -15,7 +15,7 @@ public class PaisService {
     private final PaisRepository paisRepository;
 
     public List<Pais> listarPais() {
-        List<Pais> paises = paisRepository.findAll();
+        List<Pais> paises = paisRepository.findAll(Sort.by("nomePais"));
 
         if (paises.isEmpty()) {
             throw new NotFoundException("Nenhum país encontrado.");
@@ -26,6 +26,6 @@ public class PaisService {
 
     public Pais buscarPorId(Long id) {
         return paisRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("País com id " + id + " não encontrado"));
+                .orElseThrow(() -> new NotFoundException("País com id " + id + " não encontrado."));
     }
 }
